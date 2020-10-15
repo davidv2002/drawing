@@ -1,3 +1,19 @@
+void cycling() {
+  if (key == CODED) {
+    if (keyCode == UP) {
+      cycleColorUp();
+    } 
+    if (keyCode == DOWN) {
+      cycleColorDown();
+    }
+    if (keyCode == LEFT) {
+      cycleSizeLeft();
+    }
+    if (keyCode == RIGHT) {
+      cycleSizeRight();
+    }
+  }
+}
 void cycleColorUp() {
   if (colorNumber == 3) { 
     colorNumber = 0;

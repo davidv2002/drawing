@@ -38,18 +38,5 @@ void mouseReleased() {
   //draw = false;
 }
 void keyPressed() {
-  if (key == CODED) {
-    if (keyCode == UP) {
-      cycleColorUp();
-    } 
-    if (keyCode == DOWN) {
-      cycleColorDown();
-    }
-    if (keyCode == LEFT) {
-      cycleSizeLeft();
-    }
-    if (keyCode == RIGHT) {
-      cycleSizeRight();
-    }
-  }
+  cycling();
 }
