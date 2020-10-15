@@ -4,8 +4,10 @@ float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeigh
 Boolean draw, drawTest, quitButtonTest;
 int colorNumber, brushSizeNumber;
 String title;
-PFont quitButtonFont;;color[] colors = new color[4];
-float[] brushSizes = new float[4];;
+PFont quitButtonFont;
+color[] colors = new color[4];
+float[] brushSizes = new float[4];
+
 void setup() {
   size(1280, 720);
   population();
@@ -28,16 +30,13 @@ void draw() {
 
 void mousePressed() {
   quitButtonMouseClicked();
-  if (draw == false && drawTest == true) {
-    draw = true;
-  } else if (draw == true) {
-    draw = false;
-  }
+  drawLatch();
 }
 
 void mouseReleased() {
   //draw = false;
 }
+
 void keyPressed() {
   cycling();
 }

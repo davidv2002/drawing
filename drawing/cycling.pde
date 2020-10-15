@@ -14,6 +14,7 @@ void cycling() {
     }
   }
 }
+
 void cycleColorUp() {
   if (colorNumber == 3) { 
     colorNumber = 0;
