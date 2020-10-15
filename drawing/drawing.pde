@@ -29,7 +29,7 @@ void mousePressed() {
   quitButtonMouseClicked();
   if (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight && draw == false) {
     draw = true;
-  } else if (draw == true){
+  } else if (draw == true) {
     draw = false;
   }
 }
