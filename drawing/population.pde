@@ -10,8 +10,17 @@ void population() {
   exitButtonXColor = #9B5454;
   quitButtonRed = red = #ED2626;
   black = 0;
+  green = #15D113;
+  blue = #4C47F2;
   // booleans
   draw = false;
   // strings
   title = "X";
+  // arrays
+  colors[0] = black;
+  colors[1] = red;
+  colors[2] = green;
+  colors[3] = blue;
+  // ints
+  colorNumber = 0;
 }

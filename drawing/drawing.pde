@@ -1,7 +1,9 @@
 // global variables
-color ink, black, red;
+color ink, black, red, green, blue;
 float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
 Boolean draw;
+color[] colors = new color[4];
+int colorNumber;
 
 void setup() {
   size(1280, 720);
@@ -24,12 +26,14 @@ void draw() {
 
 void mousePressed() {
   quitButtonMouseClicked();
-  if (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
-    if (mouseButton == LEFT) {
-      ink = black;
-    } else {
-      ink = red;
+  if (mouseButton == RIGHT) {
+    if (colorNumber == 3) { 
+      colorNumber = 0;
+    } else { 
+      colorNumber++;
     }
+    ink = colors[colorNumber];
+  } else if (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
     draw = true;
   }
   drawingDiameter = width*1/100;
