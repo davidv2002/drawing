@@ -18,9 +18,11 @@ void setup() {
 void draw() {
   quitButtonDraw();
 
-  if (draw == true) {
+  if (draw == true && mouseX>drawingSurfaceX  && mouseX<drawingSurfaceX+drawingSurfaceWidth  && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
     fill(ink);
     ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
+  } else {
+    draw = false;
   }
 }
 
@@ -36,4 +38,7 @@ void mousePressed() {
     ink = black; // example to change ink
     drawingDiameter = width*1/100;
   }
+}
+void mouseReleased() {
+  draw = false;
 }
