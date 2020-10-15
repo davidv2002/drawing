@@ -26,14 +26,7 @@ void draw() {
 
 void mousePressed() {
   quitButtonMouseClicked();
-  if (mouseButton == RIGHT) {
-    if (colorNumber == 3) { 
-      colorNumber = 0;
-    } else { 
-      colorNumber++;
-    }
-    ink = colors[colorNumber];
-  } else if (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
+  if (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
     draw = true;
   }
   drawingDiameter = width*1/100;
@@ -41,4 +34,7 @@ void mousePressed() {
 
 void mouseReleased() {
   draw = false;
+}
+void keyPressed() {
+  cycle();
 }
