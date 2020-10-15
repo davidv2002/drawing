@@ -1,5 +1,5 @@
 // global variables
-color ink, black;
+color ink, black, red;
 float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
 Boolean draw;
 
@@ -14,7 +14,9 @@ void draw() {
   quitButtonDraw();
   if (draw == true && mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
     fill(ink);
+    noStroke();
     ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
+    stroke(black);
   } else {
     draw = false;
   }
@@ -22,10 +24,14 @@ void draw() {
 
 void mousePressed() {
   quitButtonMouseClicked();
-  if ( mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
+  if (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
+    if (mouseButton == LEFT) {
+      ink = black;
+    } else {
+      ink = red;
+    }
     draw = true;
   }
-  ink = black;
   drawingDiameter = width*1/100;
 }
 

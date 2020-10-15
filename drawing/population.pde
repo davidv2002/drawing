@@ -8,7 +8,7 @@ void population() {
   drawingSurfaceHeight = height*4/5;
   // colors
   exitButtonXColor = #9B5454;
-  quitButtonRed = #ED2626;
+  quitButtonRed = red = #ED2626;
   black = 0;
   // booleans
   draw = false;
