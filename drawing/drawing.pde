@@ -36,5 +36,11 @@ void mouseReleased() {
   draw = false;
 }
 void keyPressed() {
-  cycle();
+  if (key == CODED) {
+  if (keyCode == UP) {
+      cycleUp();
+    } else if (keyCode == DOWN) {
+      cycleDown();
+    } 
+  }
 }
