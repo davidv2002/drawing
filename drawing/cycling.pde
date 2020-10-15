@@ -16,7 +16,7 @@ void cycling() {
 }
 
 void cycleColorUp() {
-  if (colorNumber == 3) { 
+  if (colorNumber == colors.length-1) { 
     colorNumber = 0;
   } else { 
     colorNumber++;
@@ -26,7 +26,7 @@ void cycleColorUp() {
 
 void cycleColorDown() {
   if (colorNumber == 0) { 
-    colorNumber = 3;
+    colorNumber = colors.length-1;
   } else { 
     colorNumber--;
   }
@@ -35,7 +35,7 @@ void cycleColorDown() {
 
 void cycleSizeLeft() {
   if (brushSizeNumber == 0) { 
-    brushSizeNumber = 3;
+    brushSizeNumber = brushSizes.length-1;
   } else { 
     brushSizeNumber--;
   }
@@ -43,7 +43,7 @@ void cycleSizeLeft() {
 }
 
 void cycleSizeRight() {
-  if (brushSizeNumber == 3) { 
+  if (brushSizeNumber == brushSizes.length-1) { 
     brushSizeNumber = 0;
   } else { 
     brushSizeNumber++;

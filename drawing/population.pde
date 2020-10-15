@@ -2,14 +2,14 @@ void population() {
   // fonts
   quitButtonFont = createFont ("Microsoft Sans Serif", 55);
   // floats
-  drawingSurfaceX = width*0;
-  drawingSurfaceY = height*0;
+  drawingSurfaceX = 0;
+  drawingSurfaceY = 0;
   drawingSurfaceWidth = width*3/4;
   drawingSurfaceHeight = height*4/5;
   // colors
   exitButtonXColor = #9B5454;
   quitButtonRed = red = #ED2626;
-  black = 0;
+  black = #000000;
   green = #15D113;
   blue = #4C47F2;
   // booleans
@@ -34,5 +34,5 @@ void population() {
 
 void populationDraw() {
   drawTest = (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight);
-  quitButtonTest = (mouseX >= width*19/20 && mouseX <= width && mouseY >= height*0 && mouseY <= height*1/20);
+  quitButtonTest = (mouseX >= width*19/20 && mouseX <= width && mouseY >= 0 && mouseY <= height*1/20);
 }
