@@ -17,10 +17,17 @@ void population() {
   // strings
   title = "X";
   // arrays
+  // colors
   colors[0] = black;
   colors[1] = red;
   colors[2] = green;
   colors[3] = blue;
-  // ints
-  colorNumber = 0;
+  // sizes
+  brushSizes[0] = width*1/150;
+  brushSizes[1] = width*1/100;
+  brushSizes[2] = width*1/75;
+  brushSizes[3] = width*1/50;
+  // intal state
+  ink =  colors[0];
+  drawingDiameter = brushSizes[0];
 }
