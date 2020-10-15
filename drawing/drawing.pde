@@ -1,11 +1,11 @@
 // global variables
-color ink, black, red, green, blue;
+color ink, black, red, green, blue, exitButtonXColor, quitButtonRed;
 float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
-Boolean draw;
-color[] colors = new color[4];
-float[] brushSizes = new float[4];
+Boolean draw, drawTest, quitButtonTest;
 int colorNumber, brushSizeNumber;
-
+String title;
+PFont quitButtonFont;;color[] colors = new color[4];
+float[] brushSizes = new float[4];;
 void setup() {
   size(1280, 720);
   population();
@@ -14,8 +14,9 @@ void setup() {
 }
 
 void draw() {
+  populationDraw();
   quitButtonDraw();
-  if (draw == true && mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight) {
+  if (draw == true && drawTest == true) {
     fill(ink);
     noStroke();
     ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
@@ -27,7 +28,7 @@ void draw() {
 
 void mousePressed() {
   quitButtonMouseClicked();
-  if (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight && draw == false) {
+  if (draw == false && drawTest == true) {
     draw = true;
   } else if (draw == true) {
     draw = false;

@@ -31,3 +31,8 @@ void population() {
   ink =  colors[0];
   drawingDiameter = brushSizes[0];
 }
+
+void populationDraw() {
+  drawTest = (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight);
+  quitButtonTest = (mouseX >= width*19/20 && mouseX <= width && mouseY >= height*0 && mouseY <= height*1/20);
+}
