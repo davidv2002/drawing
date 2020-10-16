@@ -31,7 +31,10 @@ void draw() {
 
 void mousePressed() {
   quitButtonMouseClicked();
-  drawLatch();
+  //drawLatch();
+  if (drawTest == true) {
+    draw = true;
+  }
 }
 
 void mouseReleased() {
