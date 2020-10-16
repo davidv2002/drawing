@@ -36,14 +36,16 @@ void draw() {
 void mousePressed() {
   quitButtonMouseClicked();
   interfaceClicked();
-  //drawLatch();
+  drawLatch();
+  /*
   if (drawTest == true) {
     draw = true;
   }
+  */
 }
 
 void mouseReleased() {
-  draw = false;
+  //draw = false;
 }
 
 void keyPressed() {

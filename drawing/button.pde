@@ -32,4 +32,12 @@ void interfaceClicked() {
     println("down");
     cycleColorDown();
   }
-};
+    if (leftTest == true) {
+    println("left");
+    cycleSizeLeft();
+  }
+  if (rightTest == true) {
+    println("right");
+    cycleSizeRight();
+  }
+}
