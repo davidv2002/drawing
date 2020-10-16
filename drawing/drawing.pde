@@ -2,7 +2,7 @@
 color ink, black, red, green, blue, exitButtonXColor, quitButtonRed;
 float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
 Boolean draw, drawTest, quitButtonTest;
-int colorNumber, brushSizeNumber, shape;
+int colorNumber, brushSizeNumber, shape, shapeCount;
 String title;
 PFont quitButtonFont;
 color[] colors = new color[4];
@@ -48,6 +48,5 @@ void mouseReleased() {
 void keyPressed() {
   if (key == CODED) {
     cycling();
-  } else {
   }
 }

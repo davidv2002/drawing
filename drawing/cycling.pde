@@ -36,6 +36,7 @@ void cycleColorDown() {
 void cycleSizeLeft() {
   if (brushSizeNumber == 0) { 
     brushSizeNumber = brushSizes.length-1;
+    shapeDown();
   } else { 
     brushSizeNumber--;
   }
@@ -45,6 +46,7 @@ void cycleSizeLeft() {
 void cycleSizeRight() {
   if (brushSizeNumber == brushSizes.length-1) { 
     brushSizeNumber = 0;
+    shapeUp();
   } else { 
     brushSizeNumber++;
   }

@@ -26,19 +26,3 @@ void drawInterface() {
     break;
   }
 }
-
-void dot() {
-  fill(ink);
-  noStroke();
-  ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
-  stroke(black);
-}
-
-void square() {
-  rectMode(CENTER);
-  fill(ink);
-  noStroke();
-  square(mouseX, mouseY, drawingDiameter);
-  stroke(black);
-  rectMode(CORNER);
-}
