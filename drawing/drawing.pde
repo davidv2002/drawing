@@ -18,6 +18,7 @@ void setup() {
 void draw() {
   populationDraw();
   quitButtonDraw();
+  drawInterface();
   if (draw == true && drawTest == true) {
     fill(ink);
     noStroke();
@@ -34,7 +35,7 @@ void mousePressed() {
 }
 
 void mouseReleased() {
-  //draw = false;
+  draw = false;
 }
 
 void keyPressed() {
