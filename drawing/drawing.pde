@@ -2,7 +2,7 @@
 color ink, black, red, green, blue, exitButtonXColor, quitButtonRed;
 float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
 Boolean draw, drawTest, quitButtonTest;
-int colorNumber, brushSizeNumber;
+int colorNumber, brushSizeNumber, shape;
 String title;
 PFont quitButtonFont;
 color[] colors = new color[4];
@@ -20,10 +20,11 @@ void draw() {
   quitButtonDraw();
   drawInterface();
   if (draw == true && drawTest == true) {
-    fill(ink);
-    noStroke();
-    ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
-    stroke(black);
+    switch(shape){
+      case 0:
+      dot();
+      break;
+    }
   } else {
     draw = false;
   }
