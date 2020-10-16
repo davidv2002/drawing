@@ -1,7 +1,7 @@
 // global variables
 color ink, black, red, green, blue, exitButtonXColor, quitButtonRed;
-float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter;
-Boolean draw, drawTest, quitButtonTest;
+float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter, heightOffset;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 String title;
 PFont quitButtonFont;
@@ -35,6 +35,7 @@ void draw() {
 
 void mousePressed() {
   quitButtonMouseClicked();
+  interfaceClicked();
   //drawLatch();
   if (drawTest == true) {
     draw = true;

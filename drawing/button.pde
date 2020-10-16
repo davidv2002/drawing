@@ -22,3 +22,14 @@ void quitButtonMouseClicked() {
     exit();
   }
 }
+
+void interfaceClicked() {
+  if (upTest == true) {
+    println("up");
+    cycleColorUp();
+  }
+  if (downTest == true) {
+    println("down");
+    cycleColorDown();
+  }
+};
