@@ -12,7 +12,7 @@ void quitButtonDraw() {
   }
   fill(exitButtonXColor);
   textAlign (CENTER, CENTER);
-  textFont(quitButtonFont, 20);
+  textFont(quitButtonFont, height/36);
   text(title, width*19/20, 0, width*1/20, height*1/20); 
   fill(255);
 }

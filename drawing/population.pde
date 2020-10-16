@@ -4,7 +4,7 @@ void population() {
   // floats
   drawingSurfaceX = 0;
   drawingSurfaceY = 0;
-  drawingSurfaceWidth = width*3/4;
+  drawingSurfaceWidth = width;
   drawingSurfaceHeight = height*4/5;
   // colors
   exitButtonXColor = #9B5454;
