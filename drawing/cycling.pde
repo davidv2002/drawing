@@ -1,17 +1,17 @@
 void cycling() {
-  if (key == CODED) {
-    if (keyCode == UP) {
-      cycleColorUp();
-    } 
-    if (keyCode == DOWN) {
-      cycleColorDown();
-    }
-    if (keyCode == LEFT) {
-      cycleSizeLeft();
-    }
-    if (keyCode == RIGHT) {
-      cycleSizeRight();
-    }
+  switch(keyCode) {
+  case UP:
+    cycleColorUp();
+    break;
+  case DOWN:
+    cycleColorDown();
+    break;
+  case LEFT:
+    cycleSizeLeft();
+    break;
+  case RIGHT:
+    cycleSizeRight();
+    break;
   }
 }
 

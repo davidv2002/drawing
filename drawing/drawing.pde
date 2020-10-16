@@ -42,5 +42,7 @@ void mouseReleased() {
 }
 
 void keyPressed() {
-  cycling();
+  if (key == CODED) {
+    cycling();
+  }
 }
