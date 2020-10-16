@@ -30,7 +30,7 @@ void population() {
   // intal state
   ink =  colors[0];
   drawingDiameter = brushSizes[0];
-  shape = 0;
+  shape = 1;
 }
 
 void populationDraw() {

@@ -24,6 +24,9 @@ void draw() {
       case 0:
       dot();
       break;
+      case 1:
+      square();
+      break;
     }
   } else {
     draw = false;
@@ -45,5 +48,6 @@ void mouseReleased() {
 void keyPressed() {
   if (key == CODED) {
     cycling();
+  } else {
   }
 }
