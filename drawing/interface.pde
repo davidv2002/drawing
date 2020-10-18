@@ -3,17 +3,21 @@ void drawInterface() {
   fill(ink);
   square(0, drawingSurfaceHeight, heightOffset);
   fill(255);
+  // color buttons
   square(heightOffset, drawingSurfaceHeight, (heightOffset)/2);
   square(heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
   // shape and size
-  square((heightOffset)*1.5, drawingSurfaceHeight, heightOffset);
   if (update == true) {
+    square((heightOffset)*1.5, drawingSurfaceHeight, heightOffset);
     interfaceShape();
   }
+  // shape buttons
   square((heightOffset)*2.5, drawingSurfaceHeight, (heightOffset)/2);
   square((heightOffset)*2.5, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  // size buttons
   square((heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2);
   square((heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  // text on buttons
   interfaceText();
   update = false;
 }
@@ -21,11 +25,13 @@ void drawInterface() {
 void interfaceShape() {
   switch(shape) {
   case 0:
+    // dot
     fill(0);
     circle((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
     fill(255);
     break;
   case 1:
+    // square
     rectMode(CENTER);
     fill(0);
     square((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
@@ -33,6 +39,7 @@ void interfaceShape() {
     fill(255);
     break;
   case 2:
+    // airbrush
     for ( int i= 0; i < 50; i++) {
       float X = ( randomGaussian() * (drawingDiameter/1.5)) + (heightOffset)*2;
       float Y = ( randomGaussian() * (drawingDiameter/1.5)) + (drawingSurfaceHeight+height)/2;
@@ -49,7 +56,7 @@ void interfaceShape() {
 void interfaceText() {
   fill(0);
   textAlign (CENTER, CENTER);
-  textFont(quitButtonFont, height/30);
+  textFont(buttonFont, height/30);
   text("color up", heightOffset, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
   text("color down", heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
   text("size up", (heightOffset)*2.5, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);

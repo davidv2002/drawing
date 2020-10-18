@@ -16,33 +16,18 @@ void square() {
 
 void airBrush() {
   for ( int i= 0; i < 25; i++) {
+    // setup
     float X = ( randomGaussian() * (drawingDiameter/2)) + mouseX;
     float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
+    // safety
     if ( Y > drawingSurfaceHeight) {
       X = 0;
       Y = height;
     }
+    // draw
     noStroke();
     fill(ink);
     circle(X, Y, 1);
     stroke(black);
   }
-}
-
-void shapeDown() {
-  if (shape == 0) { 
-    shape = shapeCount;
-  } else { 
-    shape--;
-  }
-  update = true;
-}
-
-void shapeUp() {
-  if (shape == shapeCount) { 
-    shape = 0;
-  } else { 
-    shape++;
-  }
-  update = true;
 }

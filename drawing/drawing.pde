@@ -4,7 +4,7 @@ float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeigh
 Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 String title;
-PFont quitButtonFont;
+PFont buttonFont;
 color[] colors = new color[4];
 float[] brushSizes = new float[4];
 
@@ -16,8 +16,8 @@ void setup() {
 }
 
 void draw() {
-  populationDraw();
-  quitButtonDraw();
+  tests();
+  drawQuitButton();
   drawInterface();
   if (draw == true && drawTest == true) {
     switch(shape) {
