@@ -7,10 +7,16 @@ void cycling() {
     cycleColorDown();
     break;
   case LEFT:
-    cycleSizeLeft();
+    cycleSizeDown();
     break;
   case RIGHT:
-    cycleSizeRight();
+    cycleSizeUp();
+    break;
+  case 33: // page up
+    shapeUp();
+    break;
+  case 34: // page down
+    shapeDown();
     break;
   }
 }
@@ -21,6 +27,7 @@ void cycleColorUp() {
   } else { 
     colorNumber++;
   }
+  update = true;
   ink = colors[colorNumber];
 }
 
@@ -30,25 +37,44 @@ void cycleColorDown() {
   } else { 
     colorNumber--;
   }
+  update = true;
   ink = colors[colorNumber];
 }
 
-void cycleSizeLeft() {
+void cycleSizeDown() {
   if (brushSizeNumber == 0) { 
     brushSizeNumber = brushSizes.length-1;
-    shapeDown();
   } else { 
     brushSizeNumber--;
   }
+  update = true;
   drawingDiameter = brushSizes[brushSizeNumber];
 }
 
-void cycleSizeRight() {
+void cycleSizeUp() {
   if (brushSizeNumber == brushSizes.length-1) { 
     brushSizeNumber = 0;
-    shapeUp();
   } else { 
     brushSizeNumber++;
   }
+  update = true;
   drawingDiameter = brushSizes[brushSizeNumber];
+}
+
+void shapeDown() {
+  if (shape == 0) { 
+    shape = shapeCount;
+  } else { 
+    shape--;
+  }
+  update = true;
+}
+
+void shapeUp() {
+  if (shape == shapeCount) { 
+    shape = 0;
+  } else { 
+    shape++;
+  }
+  update = true;
 }

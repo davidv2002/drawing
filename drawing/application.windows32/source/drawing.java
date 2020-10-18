@@ -17,10 +17,10 @@ public class drawing extends PApplet {
 // global variables
 int ink, black, red, green, blue, exitButtonXColor, quitButtonRed;
 float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter, heightOffset;
-Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 String title;
-PFont quitButtonFont;
+PFont buttonFont;
 int[] colors = new int[4];
 float[] brushSizes = new float[4];
 
@@ -32,16 +32,19 @@ public void setup() {
 }
 
 public void draw() {
-  populationDraw();
-  quitButtonDraw();
+  tests();
+  drawQuitButton();
   drawInterface();
   if (draw == true && drawTest == true) {
-    switch(shape){
-      case 0:
+    switch(shape) {
+    case 0:
       dot();
       break;
-      case 1:
+    case 1:
       square();
+      break;
+    case 2:
+      airBrush();
       break;
     }
   } else {
@@ -53,15 +56,10 @@ public void mousePressed() {
   quitButtonMouseClicked();
   interfaceClicked();
   drawLatch();
-  /*
-  if (drawTest == true) {
-    draw = true;
-  }
-  */
 }
 
 public void mouseReleased() {
-  //draw = false;
+  draw = false;
 }
 
 public void keyPressed() {
@@ -73,7 +71,8 @@ public void quitButtonRect() {
   rect(width*19/20, 0, width*1/20, height*1/20);
 }
 
-public void quitButtonDraw() {
+public void drawQuitButton() {
+  // hover over
   if (quitButtonTest == true) {
     fill(quitButtonRed);
     quitButtonRect();
@@ -81,10 +80,11 @@ public void quitButtonDraw() {
     fill(black);
     quitButtonRect();
   }
+  // button text
   fill(exitButtonXColor);
   textAlign (CENTER, CENTER);
-  textFont(quitButtonFont, height/36);
-  text(title, width*19/20, 0, width*1/20, height*1/20); 
+  textFont(buttonFont, height/36);
+  text("X", width*19/20, 0, width*1/20, height*1/20); 
   fill(255);
 }
 
@@ -103,13 +103,21 @@ public void interfaceClicked() {
     println("down");
     cycleColorDown();
   }
-    if (leftTest == true) {
-    println("left");
-    cycleSizeLeft();
-  }
   if (rightTest == true) {
     println("right");
-    cycleSizeRight();
+    cycleSizeUp();
+  }
+  if (leftTest == true) {
+    println("left");
+    cycleSizeDown();
+  }
+  if (pageUpTest == true) {
+    println("page up");
+    shapeUp();
+  }
+  if (pageDownTest == true) {
+    println("page down");
+    shapeDown();
   }
 }
 public void cycling() {
@@ -121,10 +129,16 @@ public void cycling() {
     cycleColorDown();
     break;
   case LEFT:
-    cycleSizeLeft();
+    cycleSizeDown();
     break;
   case RIGHT:
-    cycleSizeRight();
+    cycleSizeUp();
+    break;
+  case 33: // page up
+    shapeUp();
+    break;
+  case 34: // page down
+    shapeDown();
     break;
   }
 }
@@ -135,6 +149,7 @@ public void cycleColorUp() {
   } else { 
     colorNumber++;
   }
+  update = true;
   ink = colors[colorNumber];
 }
 
@@ -144,31 +159,117 @@ public void cycleColorDown() {
   } else { 
     colorNumber--;
   }
+  update = true;
   ink = colors[colorNumber];
 }
 
-public void cycleSizeLeft() {
+public void cycleSizeDown() {
   if (brushSizeNumber == 0) { 
     brushSizeNumber = brushSizes.length-1;
-    shapeDown();
   } else { 
     brushSizeNumber--;
   }
+  update = true;
   drawingDiameter = brushSizes[brushSizeNumber];
 }
 
-public void cycleSizeRight() {
+public void cycleSizeUp() {
   if (brushSizeNumber == brushSizes.length-1) { 
     brushSizeNumber = 0;
-    shapeUp();
   } else { 
     brushSizeNumber++;
   }
+  update = true;
   drawingDiameter = brushSizes[brushSizeNumber];
+}
+
+public void shapeDown() {
+  if (shape == 0) { 
+    shape = shapeCount;
+  } else { 
+    shape--;
+  }
+  update = true;
+}
+
+public void shapeUp() {
+  if (shape == shapeCount) { 
+    shape = 0;
+  } else { 
+    shape++;
+  }
+  update = true;
+}
+public void drawInterface() {
+  // color
+  fill(ink);
+  square(0, drawingSurfaceHeight, heightOffset);
+  fill(255);
+  // color buttons
+  square(heightOffset, drawingSurfaceHeight, (heightOffset)/2);
+  square(heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  // shape and size
+  if (update == true) {
+    square((heightOffset)*1.5f, drawingSurfaceHeight, heightOffset);
+    interfaceShape();
+  }
+  // shape buttons
+  square((heightOffset)*2.5f, drawingSurfaceHeight, (heightOffset)/2);
+  square((heightOffset)*2.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  // size buttons
+  square((heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2);
+  square((heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  // text on buttons
+  interfaceText();
+  update = false;
+}
+
+public void interfaceShape() {
+  switch(shape) {
+  case 0:
+    // dot
+    fill(0);
+    circle((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
+    fill(255);
+    break;
+  case 1:
+    // square
+    rectMode(CENTER);
+    fill(0);
+    square((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
+    rectMode(CORNER);
+    fill(255);
+    break;
+  case 2:
+    // airbrush
+    for ( int i= 0; i < 50; i++) {
+      float X = ( randomGaussian() * (drawingDiameter/1.5f)) + (heightOffset)*2;
+      float Y = ( randomGaussian() * (drawingDiameter/1.5f)) + (drawingSurfaceHeight+height)/2;
+      fill(0);
+      noStroke();
+      circle(X, Y, 3);
+      stroke(0);
+      fill(255);
+    }
+    break;
+  }
+}
+
+public void interfaceText() {
+  fill(0);
+  textAlign (CENTER, CENTER);
+  textFont(buttonFont, height/30);
+  text("color up", heightOffset, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("color down", heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  text("size up", (heightOffset)*2.5f, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("size down", (heightOffset)*2.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  text("shape up", (heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("shape down", (heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  fill(255);
 }
 public void population() {
   // fonts
-  quitButtonFont = createFont ("Microsoft Sans Serif", 55);
+  buttonFont = createFont ("Microsoft Sans Serif", 55);
   // floats
   drawingSurfaceX = 0;
   drawingSurfaceY = 0;
@@ -181,10 +282,6 @@ public void population() {
   black = 0xff000000;
   green = 0xff15D113;
   blue = 0xff4C47F2;
-  // booleans
-  draw = false;
-  // strings
-  title = "X";
   // arrays
   // colors
   colors[0] = black;
@@ -197,26 +294,32 @@ public void population() {
   brushSizes[2] = width*1/75;
   brushSizes[3] = width*1/50;
   // ints
-  shapeCount = 1;
-  // intal state
+  shapeCount = 2;
+  // intal states
   ink =  colors[0];
   drawingDiameter = brushSizes[0];
   shape = 0;
+  update = true;
+  draw = false;
 }
 
-public void populationDraw() {
+public void tests() {
+  // drawing test
   drawTest = (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight);
+  // interface tests
   quitButtonTest = (mouseX >= width*19/20 && mouseX <= width && mouseY >= 0 && mouseY <= height*1/20);
   upTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
   downTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
-  leftTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  rightTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
+  rightTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
+  leftTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
+  pageUpTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
+  pageDownTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
 }
 
 public void dot() {
   fill(ink);
   noStroke();
-  ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
+  circle(mouseX, mouseY, drawingDiameter);
   stroke(black);
 }
 
@@ -229,19 +332,21 @@ public void square() {
   rectMode(CORNER);
 }
 
-public void shapeDown() {
-  if (shape == 0) { 
-    shape = shapeCount;
-  } else { 
-    shape--;
-  }
-}
-
-public void shapeUp() {
-  if (shape == shapeCount) { 
-    shape = 0;
-  } else { 
-    shape++;
+public void airBrush() {
+  for ( int i= 0; i < 25; i++) {
+    // setup
+    float X = ( randomGaussian() * (drawingDiameter/2)) + mouseX;
+    float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
+    // safety
+    if ( Y > drawingSurfaceHeight) {
+      X = 0;
+      Y = height;
+    }
+    // draw
+    noStroke();
+    fill(ink);
+    circle(X, Y, 1);
+    stroke(black);
   }
 }
 public void drawLatch() {
@@ -249,37 +354,6 @@ public void drawLatch() {
     draw = true;
   } else if (draw == true) {
     draw = false;
-  }
-}
-
-public void drawInterface() {
-  // color
-  fill(ink);
-  square(0, drawingSurfaceHeight, heightOffset);
-  fill(255);
-  square(heightOffset, drawingSurfaceHeight, (heightOffset)/2);
-  square(heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
-  // shape and size
-  square((heightOffset)*1.5f, drawingSurfaceHeight, heightOffset);
-  interfaceShape();
-  square((heightOffset)*2.5f, drawingSurfaceHeight, (heightOffset)/2);
-  square((heightOffset)*2.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
-}
-
-public void interfaceShape() {
-  switch(shape) {
-  case 0:
-    fill(0);
-    ellipse((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter, drawingDiameter);
-    fill(255);
-    break;
-  case 1:
-    rectMode(CENTER);
-    fill(0);
-    square((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
-    rectMode(CORNER);
-    fill(255);
-    break;
   }
 }
   public void settings() {  size(1280, 720); }

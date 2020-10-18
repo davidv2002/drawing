@@ -1,7 +1,7 @@
 void dot() {
   fill(ink);
   noStroke();
-  ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
+  circle(mouseX, mouseY, drawingDiameter);
   stroke(black);
 }
 
@@ -14,18 +14,20 @@ void square() {
   rectMode(CORNER);
 }
 
-void shapeDown() {
-  if (shape == 0) { 
-    shape = shapeCount;
-  } else { 
-    shape--;
-  }
-}
-
-void shapeUp() {
-  if (shape == shapeCount) { 
-    shape = 0;
-  } else { 
-    shape++;
+void airBrush() {
+  for ( int i= 0; i < 25; i++) {
+    // setup
+    float X = ( randomGaussian() * (drawingDiameter/2)) + mouseX;
+    float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
+    // safety
+    if ( Y > drawingSurfaceHeight) {
+      X = 0;
+      Y = height;
+    }
+    // draw
+    noStroke();
+    fill(ink);
+    circle(X, Y, 1);
+    stroke(black);
   }
 }

@@ -2,7 +2,8 @@ void quitButtonRect() {
   rect(width*19/20, 0, width*1/20, height*1/20);
 }
 
-void quitButtonDraw() {
+void drawQuitButton() {
+  // hover over
   if (quitButtonTest == true) {
     fill(quitButtonRed);
     quitButtonRect();
@@ -10,10 +11,11 @@ void quitButtonDraw() {
     fill(black);
     quitButtonRect();
   }
+  // button text
   fill(exitButtonXColor);
   textAlign (CENTER, CENTER);
-  textFont(quitButtonFont, height/36);
-  text(title, width*19/20, 0, width*1/20, height*1/20); 
+  textFont(buttonFont, height/36);
+  text("X", width*19/20, 0, width*1/20, height*1/20); 
   fill(255);
 }
 
@@ -32,12 +34,20 @@ void interfaceClicked() {
     println("down");
     cycleColorDown();
   }
-    if (leftTest == true) {
-    println("left");
-    cycleSizeLeft();
-  }
   if (rightTest == true) {
     println("right");
-    cycleSizeRight();
+    cycleSizeUp();
+  }
+  if (leftTest == true) {
+    println("left");
+    cycleSizeDown();
+  }
+  if (pageUpTest == true) {
+    println("page up");
+    shapeUp();
+  }
+  if (pageDownTest == true) {
+    println("page down");
+    shapeDown();
   }
 }
