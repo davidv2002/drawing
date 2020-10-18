@@ -21,6 +21,7 @@ void cycleColorUp() {
   } else { 
     colorNumber++;
   }
+  update = true;
   ink = colors[colorNumber];
 }
 
@@ -30,6 +31,7 @@ void cycleColorDown() {
   } else { 
     colorNumber--;
   }
+  update = true;
   ink = colors[colorNumber];
 }
 
@@ -40,6 +42,7 @@ void cycleSizeLeft() {
   } else { 
     brushSizeNumber--;
   }
+  update = true;
   drawingDiameter = brushSizes[brushSizeNumber];
 }
 
@@ -50,5 +53,6 @@ void cycleSizeRight() {
   } else { 
     brushSizeNumber++;
   }
+  update = true;
   drawingDiameter = brushSizes[brushSizeNumber];
 }

@@ -18,6 +18,7 @@ void drawInterface() {
   interfaceShape();
   square((heightOffset)*2.5, drawingSurfaceHeight, (heightOffset)/2);
   square((heightOffset)*2.5, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  update = false;
 }
 
 void interfaceShape() {
@@ -33,6 +34,15 @@ void interfaceShape() {
     square((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
     rectMode(CORNER);
     fill(255);
+    break;
+  case 2:
+    for ( int i= 0; i < 20; i++) {
+      float X = ( randomGaussian() * (drawingDiameter/1.5)) + (heightOffset)*2;
+      float Y = ( randomGaussian() * (drawingDiameter/1.5)) + (drawingSurfaceHeight+height)/2;
+      fill(0);
+      ellipse(X, Y, 3, 3);
+      fill(255);
+    }
     break;
   }
 }

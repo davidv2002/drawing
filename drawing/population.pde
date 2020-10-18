@@ -34,6 +34,7 @@ void population() {
   ink =  colors[0];
   drawingDiameter = brushSizes[0];
   shape = 0;
+  update = true;
 }
 
 void populationDraw() {
