@@ -1,11 +1,10 @@
 // global variables
-color ink, black, red, green, blue, exitButtonXColor, quitButtonRed;
+color ink, black, red, green, blue, white, exitButtonXColor, quitButtonRed;
 float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter, heightOffset;
 Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
-String title;
 PFont buttonFont;
-color[] colors = new color[4];
+color[] colors = new color[5];
 float[] brushSizes = new float[4];
 
 void setup() {

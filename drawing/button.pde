@@ -16,7 +16,7 @@ void drawQuitButton() {
   textAlign (CENTER, CENTER);
   textFont(buttonFont, height/36);
   text("X", width*19/20, 0, width*1/20, height*1/20); 
-  fill(255);
+  fill(white);
 }
 
 void quitButtonMouseClicked() {

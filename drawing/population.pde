@@ -13,12 +13,14 @@ void population() {
   black = #000000;
   green = #15D113;
   blue = #4C47F2;
+  white = #FFFFFF;
   // arrays
   // colors
   colors[0] = black;
   colors[1] = red;
   colors[2] = green;
   colors[3] = blue;
+  colors[4] = white;
   // sizes
   brushSizes[0] = width*1/150;
   brushSizes[1] = width*1/100;
