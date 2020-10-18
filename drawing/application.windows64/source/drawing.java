@@ -15,26 +15,24 @@ import java.io.IOException;
 public class drawing extends PApplet {
 
 // global variables
-int ink, black, red, green, blue, exitButtonXColor, quitButtonRed;
-float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter, heightOffset;
-Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, update;
+int ink, black, red, green, blue, white, backgroundColor;
+float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
-String title;
 PFont buttonFont;
-int[] colors = new int[4];
+int[] colors = new int[5];
 float[] brushSizes = new float[4];
 
 public void setup() {
   
   //fullScreen();
   population();
-  quitButtonRect();
-  rect(drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight);
+  fill(backgroundColor);
+  rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
 }
 
 public void draw() {
   tests();
-  drawQuitButton();
   drawInterface();
   if (draw == true && drawTest == true) {
     switch(shape) {
@@ -54,7 +52,6 @@ public void draw() {
 }
 
 public void mousePressed() {
-  quitButtonMouseClicked();
   interfaceClicked();
   drawLatch();
 }
@@ -66,59 +63,6 @@ public void mouseReleased() {
 public void keyPressed() {
   if (key == CODED) {
     cycling();
-  }
-}
-public void quitButtonRect() {
-  rect(width*19/20, 0, width*1/20, height*1/20);
-}
-
-public void drawQuitButton() {
-  // hover over
-  if (quitButtonTest == true) {
-    fill(quitButtonRed);
-    quitButtonRect();
-  } else {
-    fill(black);
-    quitButtonRect();
-  }
-  // button text
-  fill(exitButtonXColor);
-  textAlign (CENTER, CENTER);
-  textFont(buttonFont, height/36);
-  text("X", width*19/20, 0, width*1/20, height*1/20); 
-  fill(255);
-}
-
-public void quitButtonMouseClicked() {
-  if (quitButtonTest == true) {
-    exit();
-  }
-}
-
-public void interfaceClicked() {
-  if (upTest == true) {
-    println("up");
-    cycleColorUp();
-  }
-  if (downTest == true) {
-    println("down");
-    cycleColorDown();
-  }
-  if (rightTest == true) {
-    println("right");
-    cycleSizeUp();
-  }
-  if (leftTest == true) {
-    println("left");
-    cycleSizeDown();
-  }
-  if (pageUpTest == true) {
-    println("page up");
-    shapeUp();
-  }
-  if (pageDownTest == true) {
-    println("page down");
-    shapeDown();
   }
 }
 public void cycling() {
@@ -150,7 +94,6 @@ public void cycleColorUp() {
   } else { 
     colorNumber++;
   }
-  update = true;
   ink = colors[colorNumber];
 }
 
@@ -160,7 +103,6 @@ public void cycleColorDown() {
   } else { 
     colorNumber--;
   }
-  update = true;
   ink = colors[colorNumber];
 }
 
@@ -204,15 +146,18 @@ public void shapeUp() {
 public void drawInterface() {
   // color
   fill(ink);
-  square(0, drawingSurfaceHeight, heightOffset);
-  fill(255);
+  square(drawingSurfaceStart, drawingSurfaceHeight, heightOffset);
+  fill(white);
   // color buttons
   square(heightOffset, drawingSurfaceHeight, (heightOffset)/2);
   square(heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
   // shape and size
   if (update == true) {
     square((heightOffset)*1.5f, drawingSurfaceHeight, heightOffset);
+    fill(black);
     interfaceShape();
+    fill(white);
+    update = false;
   }
   // shape buttons
   square((heightOffset)*2.5f, drawingSurfaceHeight, (heightOffset)/2);
@@ -220,44 +165,44 @@ public void drawInterface() {
   // size buttons
   square((heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2);
   square((heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  // basic pen
+  square((heightOffset)*3.5f, drawingSurfaceHeight, (heightOffset)/2);
+  // eraser
+  square((heightOffset)*3.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+
+  // quit 
+  square(width-heightOffset, drawingSurfaceHeight, heightOffset);
   // text on buttons
   interfaceText();
-  update = false;
 }
 
 public void interfaceShape() {
   switch(shape) {
   case 0:
     // dot
-    fill(0);
     circle((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
-    fill(255);
     break;
   case 1:
     // square
     rectMode(CENTER);
-    fill(0);
     square((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
     rectMode(CORNER);
-    fill(255);
     break;
   case 2:
     // airbrush
     for ( int i= 0; i < 25; i++) {
       float X = ( randomGaussian() * (drawingDiameter/1.5f)) + (heightOffset)*2;
       float Y = ( randomGaussian() * (drawingDiameter/1.5f)) + (drawingSurfaceHeight+height)/2;
-      fill(0);
       noStroke();
       circle(X, Y, height/720*3);
-      stroke(0);
-      fill(255);
+      stroke(black);
     }
     break;
   }
 }
 
 public void interfaceText() {
-  fill(0);
+  fill(black);
   textAlign (CENTER, CENTER);
   textFont(buttonFont, height/30);
   text("color up", heightOffset, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
@@ -266,29 +211,64 @@ public void interfaceText() {
   text("size down", (heightOffset)*2.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
   text("shape up", (heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
   text("shape down", (heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
-  fill(255);
+  text("basic pen", (heightOffset)*3.5f, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("big eraser", (heightOffset)*3.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  textFont(buttonFont, height/20);
+  text("quit drawing", width-heightOffset, drawingSurfaceHeight, heightOffset, heightOffset); 
+  fill(white);
+}
+
+public void interfaceClicked() {
+  if (quitButtonTest == true) {
+    exit();
+  }
+  if (upTest == true) {
+    println("up");
+    cycleColorUp();
+  }
+  if (downTest == true) {
+    println("down");
+    cycleColorDown();
+  }
+  if (rightTest == true) {
+    println("right");
+    cycleSizeUp();
+  }
+  if (leftTest == true) {
+    println("left");
+    cycleSizeDown();
+  }
+  if (pageUpTest == true) {
+    println("page up");
+    shapeUp();
+  }
+  if (pageDownTest == true) {
+    println("page down");
+    shapeDown();
+  }
+  if (penTest == true) {
+    println("basic pen");
+    basicPen();
+  }
+  if (eraserTest == true) {
+    println("big eraser");
+    eraser();
+  }
 }
 public void population() {
   // fonts
   buttonFont = createFont ("Microsoft Sans Serif", 55);
   // floats
-  drawingSurfaceX = 0;
-  drawingSurfaceY = 0;
-  drawingSurfaceWidth = width;
+  drawingSurfaceStart = 0;
   drawingSurfaceHeight = height*4/5;
   heightOffset = height-drawingSurfaceHeight;
-  // colors
-  exitButtonXColor = 0xff9B5454;
-  quitButtonRed = red = 0xffED2626;
-  black = 0xff000000;
-  green = 0xff15D113;
-  blue = 0xff4C47F2;
   // arrays
   // colors
-  colors[0] = black;
-  colors[1] = red;
-  colors[2] = green;
-  colors[3] = blue;
+  colors[0] = black = 0xff000000;
+  colors[1] = red = 0xffED2626;
+  colors[2] = green = 0xff15D113;
+  colors[3] = blue = 0xff4C47F2;
+  colors[4] = white = 0xffFFFFFF;
   // sizes
   brushSizes[0] = width*1/150;
   brushSizes[1] = width*1/100;
@@ -297,24 +277,27 @@ public void population() {
   // ints
   shapeCount = 2;
   // intal states
-  ink =  colors[0];
+  ink = colors[0];
   drawingDiameter = brushSizes[0];
   shape = 0;
   update = true;
   draw = false;
+  backgroundColor = white;
 }
 
 public void tests() {
   // drawing test
-  drawTest = (mouseX>drawingSurfaceX && mouseX<drawingSurfaceX+drawingSurfaceWidth && mouseY>drawingSurfaceY && mouseY<drawingSurfaceY+drawingSurfaceHeight);
+  drawTest = (mouseX>drawingSurfaceStart && mouseX<drawingSurfaceStart+width && mouseY>drawingSurfaceStart && mouseY<drawingSurfaceStart+drawingSurfaceHeight);
   // interface tests
-  quitButtonTest = (mouseX >= width*19/20 && mouseX <= width && mouseY >= 0 && mouseY <= height*1/20);
+  quitButtonTest = (mouseX >= width-heightOffset && mouseX <= width && mouseY >= drawingSurfaceHeight && mouseY <= height);
   upTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
   downTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
   rightTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
   leftTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
   pageUpTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
   pageDownTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
+  penTest = (mouseX>(heightOffset)*3.5f && mouseX<(heightOffset)*3.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
+  eraserTest = (mouseX>(heightOffset)*3.5f && mouseX<(heightOffset)*3.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
 }
 public void dot() {
   fill(ink);
@@ -339,7 +322,7 @@ public void airBrush() {
     float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
     // safety
     if ( Y > drawingSurfaceHeight) {
-      X = 0;
+      X = drawingSurfaceStart;
       Y = height;
     }
     // draw
@@ -355,6 +338,20 @@ public void drawLatch() {
   } else if (draw == true) {
     draw = false;
   }
+}
+
+public void basicPen() {
+  ink = colors[0];
+  drawingDiameter = brushSizes[0];
+  shape = 0;
+  update = true;
+}
+
+public void eraser() {
+  ink = backgroundColor;
+  drawingDiameter = brushSizes[brushSizes.length-1];
+  shape = 0;
+  update = true;
 }
   public void settings() {  size(1280, 720); }
   static public void main(String[] passedArgs) {

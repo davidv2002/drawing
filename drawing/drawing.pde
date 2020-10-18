@@ -1,7 +1,7 @@
 // global variables
-color ink, black, red, green, blue, white, exitButtonXColor, quitButtonRed;
-float drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight, drawingDiameter, heightOffset;
-Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, update;
+color ink, black, red, green, blue, white, backgroundColor;
+float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 PFont buttonFont;
 color[] colors = new color[5];
@@ -11,13 +11,12 @@ void setup() {
   size(1280, 720);
   //fullScreen();
   population();
-  quitButtonRect();
-  rect(drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight);
+  fill(backgroundColor);
+  rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
 }
 
 void draw() {
   tests();
-  drawQuitButton();
   drawInterface();
   if (draw == true && drawTest == true) {
     switch(shape) {
@@ -37,7 +36,6 @@ void draw() {
 }
 
 void mousePressed() {
-  quitButtonMouseClicked();
   interfaceClicked();
   drawLatch();
 }

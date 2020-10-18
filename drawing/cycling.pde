@@ -27,7 +27,6 @@ void cycleColorUp() {
   } else { 
     colorNumber++;
   }
-  update = true;
   ink = colors[colorNumber];
 }
 
@@ -37,7 +36,6 @@ void cycleColorDown() {
   } else { 
     colorNumber--;
   }
-  update = true;
   ink = colors[colorNumber];
 }
 

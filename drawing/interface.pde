@@ -1,7 +1,7 @@
 void drawInterface() {
   // color
   fill(ink);
-  square(0, drawingSurfaceHeight, heightOffset);
+  square(drawingSurfaceStart, drawingSurfaceHeight, heightOffset);
   fill(white);
   // color buttons
   square(heightOffset, drawingSurfaceHeight, (heightOffset)/2);
@@ -12,6 +12,7 @@ void drawInterface() {
     fill(black);
     interfaceShape();
     fill(white);
+    update = false;
   }
   // shape buttons
   square((heightOffset)*2.5, drawingSurfaceHeight, (heightOffset)/2);
@@ -19,9 +20,15 @@ void drawInterface() {
   // size buttons
   square((heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2);
   square((heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  // basic pen
+  square((heightOffset)*3.5, drawingSurfaceHeight, (heightOffset)/2);
+  // eraser
+  square((heightOffset)*3.5, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+
+  // quit 
+  square(width-heightOffset, drawingSurfaceHeight, heightOffset);
   // text on buttons
   interfaceText();
-  update = false;
 }
 
 void interfaceShape() {
@@ -59,5 +66,47 @@ void interfaceText() {
   text("size down", (heightOffset)*2.5, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
   text("shape up", (heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
   text("shape down", (heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  text("basic pen", (heightOffset)*3.5, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("big eraser", (heightOffset)*3.5, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  textFont(buttonFont, height/20);
+  text("quit drawing", width-heightOffset, drawingSurfaceHeight, heightOffset, heightOffset); 
   fill(white);
+}
+
+void interfaceClicked() {
+  if (quitButtonTest == true) {
+    exit();
+  }
+  if (upTest == true) {
+    println("up");
+    cycleColorUp();
+  }
+  if (downTest == true) {
+    println("down");
+    cycleColorDown();
+  }
+  if (rightTest == true) {
+    println("right");
+    cycleSizeUp();
+  }
+  if (leftTest == true) {
+    println("left");
+    cycleSizeDown();
+  }
+  if (pageUpTest == true) {
+    println("page up");
+    shapeUp();
+  }
+  if (pageDownTest == true) {
+    println("page down");
+    shapeDown();
+  }
+  if (penTest == true) {
+    println("basic pen");
+    basicPen();
+  }
+  if (eraserTest == true) {
+    println("big eraser");
+    eraser();
+  }
 }

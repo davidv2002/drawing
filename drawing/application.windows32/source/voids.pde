@@ -5,3 +5,17 @@ void drawLatch() {
     draw = false;
   }
 }
+
+void basicPen() {
+  ink = colors[0];
+  drawingDiameter = brushSizes[0];
+  shape = 0;
+  update = true;
+}
+
+void eraser() {
+  ink = backgroundColor;
+  drawingDiameter = brushSizes[brushSizes.length-1];
+  shape = 0;
+  update = true;
+}

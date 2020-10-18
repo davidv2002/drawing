@@ -21,7 +21,7 @@ void airBrush() {
     float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
     // safety
     if ( Y > drawingSurfaceHeight) {
-      X = 0;
+      X = drawingSurfaceStart;
       Y = height;
     }
     // draw
