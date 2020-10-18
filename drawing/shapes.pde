@@ -1,7 +1,7 @@
 void dot() {
   fill(ink);
   noStroke();
-  ellipse(mouseX, mouseY, drawingDiameter, drawingDiameter);
+  circle(mouseX, mouseY, drawingDiameter);
   stroke(black);
 }
 
@@ -15,12 +15,16 @@ void square() {
 }
 
 void airBrush() {
-  for ( int i= 0; i < 5; i++) {
+  for ( int i= 0; i < 25; i++) {
     float X = ( randomGaussian() * (drawingDiameter/2)) + mouseX;
     float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
+    if ( Y > drawingSurfaceHeight) {
+      X = 0;
+      Y = height;
+    }
     noStroke();
     fill(ink);
-    ellipse(X, Y, 3, 3);
+    circle(X, Y, 1);
     stroke(black);
   }
 }
