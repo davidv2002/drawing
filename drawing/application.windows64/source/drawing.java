@@ -26,6 +26,7 @@ float[] brushSizes = new float[4];
 
 public void setup() {
   
+  //fullScreen();
   population();
   quitButtonRect();
   rect(drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight);
@@ -242,12 +243,12 @@ public void interfaceShape() {
     break;
   case 2:
     // airbrush
-    for ( int i= 0; i < 50; i++) {
+    for ( int i= 0; i < 25; i++) {
       float X = ( randomGaussian() * (drawingDiameter/1.5f)) + (heightOffset)*2;
       float Y = ( randomGaussian() * (drawingDiameter/1.5f)) + (drawingSurfaceHeight+height)/2;
       fill(0);
       noStroke();
-      circle(X, Y, 3);
+      circle(X, Y, height/720*3);
       stroke(0);
       fill(255);
     }
@@ -315,7 +316,6 @@ public void tests() {
   pageUpTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
   pageDownTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
 }
-
 public void dot() {
   fill(ink);
   noStroke();
@@ -345,7 +345,7 @@ public void airBrush() {
     // draw
     noStroke();
     fill(ink);
-    circle(X, Y, 1);
+    circle(X, Y, height/720);
     stroke(black);
   }
 }

@@ -10,6 +10,7 @@ float[] brushSizes = new float[4];
 
 void setup() {
   size(1280, 720);
+  //fullScreen();
   population();
   quitButtonRect();
   rect(drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight);
