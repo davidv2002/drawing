@@ -29,7 +29,7 @@ void population() {
   brushSizes[2] = width*1/75;
   brushSizes[3] = width*1/50;
   // ints
-  shapeCount = 1;
+  shapeCount = 2;
   // intal state
   ink =  colors[0];
   drawingDiameter = brushSizes[0];

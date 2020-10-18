@@ -27,6 +27,9 @@ void draw() {
       case 1:
       square();
       break;
+      case 2:
+      airBrush();
+      break;
     }
   } else {
     draw = false;
