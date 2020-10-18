@@ -28,12 +28,14 @@ void airBrush() {
     stroke(black);
   }
 }
+
 void shapeDown() {
   if (shape == 0) { 
     shape = shapeCount;
   } else { 
     shape--;
   }
+  update = true;
 }
 
 void shapeUp() {
@@ -42,4 +44,5 @@ void shapeUp() {
   } else { 
     shape++;
   }
+  update = true;
 }

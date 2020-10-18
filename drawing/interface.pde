@@ -7,9 +7,14 @@ void drawInterface() {
   square(heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
   // shape and size
   square((heightOffset)*1.5, drawingSurfaceHeight, heightOffset);
-  interfaceShape();
+  if (update == true) {
+    interfaceShape();
+  }
   square((heightOffset)*2.5, drawingSurfaceHeight, (heightOffset)/2);
   square((heightOffset)*2.5, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  square((heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2);
+  square((heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  interfaceText();
   update = false;
 }
 
@@ -39,4 +44,17 @@ void interfaceShape() {
     }
     break;
   }
+}
+
+void interfaceText() {
+  fill(0);
+  textAlign (CENTER, CENTER);
+  textFont(quitButtonFont, height/30);
+  text("color up", heightOffset, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("color down", heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  text("size up", (heightOffset)*2.5, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("size down", (heightOffset)*2.5, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  text("shape up", (heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
+  text("shape down", (heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  fill(255);
 }

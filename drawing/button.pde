@@ -34,10 +34,18 @@ void interfaceClicked() {
   }
   if (leftTest == true) {
     println("left");
-    cycleSizeLeft();
+    cycleSizeRight();
   }
   if (rightTest == true) {
     println("right");
-    cycleSizeRight();
+    cycleSizeLeft();
+  }
+  if (pageUpTest == true) {
+    println("page up");
+    shapeUp();
+  }
+  if (pageDownTest == true) {
+    println("page down");
+    shapeDown();
   }
 }

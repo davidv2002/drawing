@@ -44,4 +44,6 @@ void populationDraw() {
   downTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
   leftTest = (mouseX>(heightOffset)*2.5 && mouseX<(heightOffset)*2.5+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
   rightTest = (mouseX>(heightOffset)*2.5 && mouseX<(heightOffset)*2.5+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
+  pageUpTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
+  pageDownTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
 }
