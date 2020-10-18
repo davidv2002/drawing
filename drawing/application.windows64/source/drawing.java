@@ -24,8 +24,8 @@ int[] colors = new int[5];
 float[] brushSizes = new float[4];
 
 public void setup() {
+  //size(1280, 720);
   
-  //fullScreen();
   population();
   fill(backgroundColor);
   rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
@@ -353,7 +353,7 @@ public void eraser() {
   shape = 0;
   update = true;
 }
-  public void settings() {  size(1280, 720); }
+  public void settings() {  fullScreen(); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "drawing" };
     if (passedArgs != null) {
