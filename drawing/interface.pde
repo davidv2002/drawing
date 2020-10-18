@@ -40,12 +40,12 @@ void interfaceShape() {
     break;
   case 2:
     // airbrush
-    for ( int i= 0; i < 50; i++) {
+    for ( int i= 0; i < 25; i++) {
       float X = ( randomGaussian() * (drawingDiameter/1.5)) + (heightOffset)*2;
       float Y = ( randomGaussian() * (drawingDiameter/1.5)) + (drawingSurfaceHeight+height)/2;
       fill(0);
       noStroke();
-      circle(X, Y, 3);
+      circle(X, Y, height/720*3);
       stroke(0);
       fill(255);
     }

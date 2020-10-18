@@ -27,7 +27,7 @@ void airBrush() {
     // draw
     noStroke();
     fill(ink);
-    circle(X, Y, 1);
+    circle(X, Y, height/720);
     stroke(black);
   }
 }

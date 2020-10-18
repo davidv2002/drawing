@@ -9,8 +9,8 @@ color[] colors = new color[4];
 float[] brushSizes = new float[4];
 
 void setup() {
-  //size(1280, 720);
-  fullScreen();
+  size(1280, 720);
+  //fullScreen();
   population();
   quitButtonRect();
   rect(drawingSurfaceX, drawingSurfaceY, drawingSurfaceWidth, drawingSurfaceHeight);
