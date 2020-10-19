@@ -1,11 +1,11 @@
 // global variables
 color ink, black, red, green, blue, white, backgroundColor;
-float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset;
-Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, update;
+float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset, halfOffset;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, clearTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 PFont buttonFont;
 color[] colors = new color[5];
-float[] brushSizes = new float[4];
+float[] brushSizes = new float[6];
 
 void setup() {
   size(1280, 720);
@@ -17,7 +17,6 @@ void setup() {
 
 void draw() {
   tests();
-  drawInterface();
   if (draw == true && drawTest == true) {
     switch(shape) {
     case 0:
@@ -33,6 +32,7 @@ void draw() {
   } else {
     draw = false;
   }
+  drawInterface();
 }
 
 void mousePressed() {

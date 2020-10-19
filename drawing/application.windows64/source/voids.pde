@@ -19,3 +19,9 @@ void eraser() {
   shape = 0;
   update = true;
 }
+
+void clearDraw() {
+  backgroundColor = ink;
+  fill(backgroundColor);
+  rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
+};

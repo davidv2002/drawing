@@ -16,16 +16,16 @@ public class drawing extends PApplet {
 
 // global variables
 int ink, black, red, green, blue, white, backgroundColor;
-float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset;
-Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, update;
+float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset, halfOffset;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, clearTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 PFont buttonFont;
 int[] colors = new int[5];
-float[] brushSizes = new float[4];
+float[] brushSizes = new float[6];
 
 public void setup() {
-  //size(1280, 720);
   
+  //fullScreen();
   population();
   fill(backgroundColor);
   rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
@@ -33,7 +33,6 @@ public void setup() {
 
 public void draw() {
   tests();
-  drawInterface();
   if (draw == true && drawTest == true) {
     switch(shape) {
     case 0:
@@ -49,6 +48,7 @@ public void draw() {
   } else {
     draw = false;
   }
+  drawInterface();
 }
 
 public void mousePressed() {
@@ -149,27 +149,29 @@ public void drawInterface() {
   square(drawingSurfaceStart, drawingSurfaceHeight, heightOffset);
   fill(white);
   // color buttons
-  square(heightOffset, drawingSurfaceHeight, (heightOffset)/2);
-  square(heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  square(heightOffset, drawingSurfaceHeight, halfOffset);
+  square(heightOffset, drawingSurfaceHeight+halfOffset, halfOffset);
   // shape and size
   if (update == true) {
-    square((heightOffset)*1.5f, drawingSurfaceHeight, heightOffset);
+    square(heightOffset*1.5f, drawingSurfaceHeight, heightOffset);
     fill(black);
     interfaceShape();
     fill(white);
     update = false;
   }
   // shape buttons
-  square((heightOffset)*2.5f, drawingSurfaceHeight, (heightOffset)/2);
-  square((heightOffset)*2.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  square(heightOffset*2.5f, drawingSurfaceHeight, halfOffset);
+  square(heightOffset*2.5f, drawingSurfaceHeight+halfOffset, halfOffset);
   // size buttons
-  square((heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2);
-  square((heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  square(heightOffset*3, drawingSurfaceHeight, halfOffset);
+  square(heightOffset*3, drawingSurfaceHeight+halfOffset, halfOffset);
   // basic pen
-  square((heightOffset)*3.5f, drawingSurfaceHeight, (heightOffset)/2);
+  square(heightOffset*3.5f, drawingSurfaceHeight, halfOffset);
   // eraser
-  square((heightOffset)*3.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2);
+  square(heightOffset*3.5f, drawingSurfaceHeight+halfOffset, halfOffset);
 
+  // background
+  square(width-heightOffset*2, drawingSurfaceHeight, heightOffset);
   // quit 
   square(width-heightOffset, drawingSurfaceHeight, heightOffset);
   // text on buttons
@@ -180,20 +182,24 @@ public void interfaceShape() {
   switch(shape) {
   case 0:
     // dot
-    circle((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
+    circle(heightOffset*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
     break;
   case 1:
     // square
     rectMode(CENTER);
-    square((heightOffset)*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
+    square(heightOffset*2, (drawingSurfaceHeight+height)/2, drawingDiameter);
     rectMode(CORNER);
     break;
   case 2:
     // airbrush
     for ( int i= 0; i < 25; i++) {
-      float X = ( randomGaussian() * (drawingDiameter/1.5f)) + (heightOffset)*2;
-      float Y = ( randomGaussian() * (drawingDiameter/1.5f)) + (drawingSurfaceHeight+height)/2;
+      float X = ( randomGaussian() * (drawingDiameter/2)) + heightOffset*2;
+      float Y = ( randomGaussian() * (drawingDiameter/2)) + (drawingSurfaceHeight+height)/2;
       noStroke();
+      if ( Y < drawingSurfaceHeight) {
+        X = heightOffset*2;
+        Y = (drawingSurfaceHeight+height)/2;
+      }
       circle(X, Y, height/720*3);
       stroke(black);
     }
@@ -205,15 +211,16 @@ public void interfaceText() {
   fill(black);
   textAlign (CENTER, CENTER);
   textFont(buttonFont, height/30);
-  text("color up", heightOffset, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
-  text("color down", heightOffset, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
-  text("size up", (heightOffset)*2.5f, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
-  text("size down", (heightOffset)*2.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
-  text("shape up", (heightOffset)*3, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
-  text("shape down", (heightOffset)*3, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
-  text("basic pen", (heightOffset)*3.5f, drawingSurfaceHeight, (heightOffset)/2, (heightOffset)/2);
-  text("big eraser", (heightOffset)*3.5f, drawingSurfaceHeight+(heightOffset)/2, (heightOffset)/2, (heightOffset)/2);
+  text("color up", heightOffset, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("color down", heightOffset, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
+  text("size up", heightOffset*2.5f, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("size down", heightOffset*2.5f, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
+  text("shape up", heightOffset*3, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("shape down", heightOffset*3, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
+  text("basic pen", heightOffset*3.5f, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("big eraser", heightOffset*3.5f, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
   textFont(buttonFont, height/20);
+  text("start again", width-heightOffset*2, drawingSurfaceHeight, heightOffset, heightOffset);
   text("quit drawing", width-heightOffset, drawingSurfaceHeight, heightOffset, heightOffset); 
   fill(white);
 }
@@ -254,7 +261,12 @@ public void interfaceClicked() {
     println("big eraser");
     eraser();
   }
+  if (clearTest == true) {
+    println("clear");
+    clearDraw();
+  }
 }
+
 public void population() {
   // fonts
   buttonFont = createFont ("Microsoft Sans Serif", 55);
@@ -262,6 +274,7 @@ public void population() {
   drawingSurfaceStart = 0;
   drawingSurfaceHeight = height*4/5;
   heightOffset = height-drawingSurfaceHeight;
+  halfOffset = heightOffset/2;
   // arrays
   // colors
   colors[0] = black = 0xff000000;
@@ -271,9 +284,11 @@ public void population() {
   colors[4] = white = 0xffFFFFFF;
   // sizes
   brushSizes[0] = width*1/150;
-  brushSizes[1] = width*1/100;
-  brushSizes[2] = width*1/75;
-  brushSizes[3] = width*1/50;
+  brushSizes[1] = width*1/125;
+  brushSizes[2] = width*1/100;
+  brushSizes[3] = width*1/75;
+  brushSizes[4] = width*1/50;
+  brushSizes[5] = width*1/25;
   // ints
   shapeCount = 2;
   // intal states
@@ -287,17 +302,18 @@ public void population() {
 
 public void tests() {
   // drawing test
-  drawTest = (mouseX>drawingSurfaceStart && mouseX<drawingSurfaceStart+width && mouseY>drawingSurfaceStart && mouseY<drawingSurfaceStart+drawingSurfaceHeight);
+  drawTest = (mouseY < drawingSurfaceHeight);
   // interface tests
-  quitButtonTest = (mouseX >= width-heightOffset && mouseX <= width && mouseY >= drawingSurfaceHeight && mouseY <= height);
-  upTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  downTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
-  rightTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  leftTest = (mouseX>(heightOffset)*2.5f && mouseX<(heightOffset)*2.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
-  pageUpTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  pageDownTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
-  penTest = (mouseX>(heightOffset)*3.5f && mouseX<(heightOffset)*3.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  eraserTest = (mouseX>(heightOffset)*3.5f && mouseX<(heightOffset)*3.5f+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
+  quitButtonTest = (mouseX > width-heightOffset && mouseY > drawingSurfaceHeight);
+  clearTest = (mouseX > width-heightOffset*2 && mouseX < width-heightOffset && mouseY > drawingSurfaceHeight);
+  upTest = (mouseX > heightOffset && mouseX < heightOffset+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  downTest = (mouseX > heightOffset && mouseX < heightOffset+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
+  rightTest = (mouseX > heightOffset*2.5f && mouseX < heightOffset*2.5f+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  leftTest = (mouseX > heightOffset*2.5f && mouseX < heightOffset*2.5f+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
+  pageUpTest = (mouseX > heightOffset*3 && mouseX < heightOffset*3+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  pageDownTest = (mouseX > heightOffset*3 && mouseX < heightOffset*3+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
+  penTest = (mouseX > heightOffset*3.5f && mouseX < heightOffset*3.5f+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  eraserTest = (mouseX > heightOffset*3.5f && mouseX < heightOffset*3.5f+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
 }
 public void dot() {
   fill(ink);
@@ -353,7 +369,13 @@ public void eraser() {
   shape = 0;
   update = true;
 }
-  public void settings() {  fullScreen(); }
+
+public void clearDraw() {
+  backgroundColor = ink;
+  fill(backgroundColor);
+  rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
+};
+  public void settings() {  size(1280, 720); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "drawing" };
     if (passedArgs != null) {

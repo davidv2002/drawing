@@ -5,6 +5,7 @@ void population() {
   drawingSurfaceStart = 0;
   drawingSurfaceHeight = height*4/5;
   heightOffset = height-drawingSurfaceHeight;
+  halfOffset = heightOffset/2;
   // arrays
   // colors
   colors[0] = black = #000000;
@@ -14,9 +15,11 @@ void population() {
   colors[4] = white = #FFFFFF;
   // sizes
   brushSizes[0] = width*1/150;
-  brushSizes[1] = width*1/100;
-  brushSizes[2] = width*1/75;
-  brushSizes[3] = width*1/50;
+  brushSizes[1] = width*1/125;
+  brushSizes[2] = width*1/100;
+  brushSizes[3] = width*1/75;
+  brushSizes[4] = width*1/50;
+  brushSizes[5] = width*1/25;
   // ints
   shapeCount = 2;
   // intal states
@@ -30,15 +33,16 @@ void population() {
 
 void tests() {
   // drawing test
-  drawTest = (mouseX>drawingSurfaceStart && mouseX<drawingSurfaceStart+width && mouseY>drawingSurfaceStart && mouseY<drawingSurfaceStart+drawingSurfaceHeight);
+  drawTest = (mouseY < drawingSurfaceHeight);
   // interface tests
-  quitButtonTest = (mouseX >= width-heightOffset && mouseX <= width && mouseY >= drawingSurfaceHeight && mouseY <= height);
-  upTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  downTest = (mouseX>heightOffset && mouseX<heightOffset+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
-  rightTest = (mouseX>(heightOffset)*2.5 && mouseX<(heightOffset)*2.5+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  leftTest = (mouseX>(heightOffset)*2.5 && mouseX<(heightOffset)*2.5+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
-  pageUpTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  pageDownTest = (mouseX>(heightOffset)*3 && mouseX<(heightOffset)*3+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
-  penTest = (mouseX>(heightOffset)*3.5 && mouseX<(heightOffset)*3.5+(heightOffset)/2 && mouseY>drawingSurfaceHeight && mouseY<drawingSurfaceHeight+(heightOffset)/2);
-  eraserTest = (mouseX>(heightOffset)*3.5 && mouseX<(heightOffset)*3.5+(heightOffset)/2 && mouseY>drawingSurfaceHeight+(heightOffset)/2 && mouseY<height);
+  quitButtonTest = (mouseX > width-heightOffset && mouseY > drawingSurfaceHeight);
+  clearTest = (mouseX > width-heightOffset*2 && mouseX < width-heightOffset && mouseY > drawingSurfaceHeight);
+  upTest = (mouseX > heightOffset && mouseX < heightOffset+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  downTest = (mouseX > heightOffset && mouseX < heightOffset+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
+  rightTest = (mouseX > heightOffset*2.5 && mouseX < heightOffset*2.5+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  leftTest = (mouseX > heightOffset*2.5 && mouseX < heightOffset*2.5+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
+  pageUpTest = (mouseX > heightOffset*3 && mouseX < heightOffset*3+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  pageDownTest = (mouseX > heightOffset*3 && mouseX < heightOffset*3+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
+  penTest = (mouseX > heightOffset*3.5 && mouseX < heightOffset*3.5+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
+  eraserTest = (mouseX > heightOffset*3.5 && mouseX < heightOffset*3.5+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
 }
