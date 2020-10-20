@@ -8,6 +8,7 @@ color[] colors = new color[5];
 float[] brushSizes = new float[6];
 
 void setup() {
+  orientation(LANDSCAPE);
   size(1280, 720);
   //fullScreen();
   population();
@@ -36,8 +37,8 @@ void draw() {
 }
 
 void mousePressed() {
-  interfaceClicked();
   drawLatch();
+  interfaceClicked();
 }
 
 void mouseReleased() {
