@@ -14,12 +14,14 @@ void population() {
   colors[3] = blue = #4C47F2;
   colors[4] = white = #FFFFFF;
   // sizes
-  brushSizes[0] = width*1/150;
-  brushSizes[1] = width*1/125;
-  brushSizes[2] = width*1/100;
-  brushSizes[3] = width*1/75;
-  brushSizes[4] = width*1/50;
-  brushSizes[5] = width*1/25;
+  brushSizes[0] = width*1/200;
+  brushSizes[1] = width*1/175;
+  brushSizes[2] = width*1/150;
+  brushSizes[3] = width*1/125;
+  brushSizes[4] = width*1/100;
+  brushSizes[5] = width*1/75;
+  brushSizes[6] = width*1/50;
+  brushSizes[7] = width*1/25;
   // ints
   shapeCount = 2;
   // pics
@@ -30,7 +32,7 @@ void population() {
   shape = 0;
   update = true;
   draw = false;
-  backgroundColor = red;
+  backgroundColor = white;
 }
 
 void tests() {
@@ -39,6 +41,7 @@ void tests() {
   // interface tests
   quitButtonTest = (pmouseX > width-heightOffset && pmouseY > drawingSurfaceHeight);
   clearTest = (pmouseX > width-heightOffset*2 && pmouseX < width-heightOffset && pmouseY > drawingSurfaceHeight);
+  pageTest = (pmouseX > width-heightOffset*3 && pmouseX < width-heightOffset*2 && pmouseY > drawingSurfaceHeight);
   upTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
   downTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight+halfOffset);
   rightTest = (pmouseX > heightOffset*2.5 && pmouseX < heightOffset*2.5+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);

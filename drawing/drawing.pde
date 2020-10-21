@@ -1,11 +1,11 @@
 // global variables
 color ink, black, red, green, blue, white, backgroundColor;
 float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset, halfOffset;
-Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, clearTest, update;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, clearTest, pageTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 PFont buttonFont;
 color[] colors = new color[5];
-float[] brushSizes = new float[6];
+float[] brushSizes = new float[8];
 PImage pic;
 
 void setup() {
@@ -35,7 +35,6 @@ void draw() {
     draw = false;
   }
   drawInterface();
-  imageDraw();
 }
 
 void mousePressed() {
