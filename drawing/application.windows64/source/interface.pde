@@ -24,7 +24,8 @@ void drawInterface() {
   square(heightOffset*3.5, drawingSurfaceHeight, halfOffset);
   // eraser
   square(heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset);
-
+  // coloring page
+  square(width-heightOffset*3, drawingSurfaceHeight, heightOffset);
   // background
   square(width-heightOffset*2, drawingSurfaceHeight, heightOffset);
   // quit 
@@ -75,6 +76,7 @@ void interfaceText() {
   text("basic pen", heightOffset*3.5, drawingSurfaceHeight, halfOffset, halfOffset);
   text("big eraser", heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
   textFont(buttonFont, height/20);
+  text("coloring page", width-heightOffset*3, drawingSurfaceHeight, heightOffset, heightOffset);
   text("start again", width-heightOffset*2, drawingSurfaceHeight, heightOffset, heightOffset);
   text("quit drawing", width-heightOffset, drawingSurfaceHeight, heightOffset, heightOffset); 
   fill(white);
@@ -119,5 +121,9 @@ void interfaceClicked() {
   if (clearTest == true) {
     println("clear");
     clearDraw();
+  }
+  if (pageTest == true) {
+    println("coloring page");
+    coloringPage();
   }
 }

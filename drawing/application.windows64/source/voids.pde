@@ -25,3 +25,10 @@ void clearDraw() {
   fill(backgroundColor);
   rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
 };
+
+void coloringPage() {
+  ink = white;
+  clearDraw();
+  ink = black;
+  image(pic, drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
+};

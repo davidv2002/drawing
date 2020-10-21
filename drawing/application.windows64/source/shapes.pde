@@ -1,7 +1,7 @@
 void dot() {
   fill(ink);
   noStroke();
-  circle(mouseX, mouseY, drawingDiameter);
+  circle(pmouseX, pmouseY, drawingDiameter);
   stroke(black);
 }
 
@@ -9,7 +9,7 @@ void square() {
   rectMode(CENTER);
   fill(ink);
   noStroke();
-  square(mouseX, mouseY, drawingDiameter);
+  square(pmouseX, pmouseY, drawingDiameter);
   stroke(black);
   rectMode(CORNER);
 }
@@ -17,8 +17,8 @@ void square() {
 void airBrush() {
   for ( int i= 0; i < 25; i++) {
     // setup
-    float X = ( randomGaussian() * (drawingDiameter/2)) + mouseX;
-    float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
+    float X = ( randomGaussian() * (drawingDiameter/2)) + pmouseX;
+    float Y = ( randomGaussian() * (drawingDiameter/2)) + pmouseY;
     // safety
     if ( Y > drawingSurfaceHeight) {
       X = drawingSurfaceStart;

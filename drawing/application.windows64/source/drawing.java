@@ -17,13 +17,15 @@ public class drawing extends PApplet {
 // global variables
 int ink, black, red, green, blue, white, backgroundColor;
 float drawingSurfaceStart, drawingSurfaceHeight, drawingDiameter, heightOffset, halfOffset;
-Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, clearTest, update;
+Boolean draw, drawTest, quitButtonTest, upTest, downTest, leftTest, rightTest, pageUpTest, pageDownTest, penTest, eraserTest, clearTest, pageTest, update;
 int colorNumber, brushSizeNumber, shape, shapeCount;
 PFont buttonFont;
 int[] colors = new int[5];
-float[] brushSizes = new float[6];
+float[] brushSizes = new float[8];
+PImage pic;
 
 public void setup() {
+  orientation(LANDSCAPE);
   
   //fullScreen();
   population();
@@ -52,8 +54,8 @@ public void draw() {
 }
 
 public void mousePressed() {
-  interfaceClicked();
   drawLatch();
+  interfaceClicked();
 }
 
 public void mouseReleased() {
@@ -169,7 +171,8 @@ public void drawInterface() {
   square(heightOffset*3.5f, drawingSurfaceHeight, halfOffset);
   // eraser
   square(heightOffset*3.5f, drawingSurfaceHeight+halfOffset, halfOffset);
-
+  // coloring page
+  square(width-heightOffset*3, drawingSurfaceHeight, heightOffset);
   // background
   square(width-heightOffset*2, drawingSurfaceHeight, heightOffset);
   // quit 
@@ -220,6 +223,7 @@ public void interfaceText() {
   text("basic pen", heightOffset*3.5f, drawingSurfaceHeight, halfOffset, halfOffset);
   text("big eraser", heightOffset*3.5f, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
   textFont(buttonFont, height/20);
+  text("coloring page", width-heightOffset*3, drawingSurfaceHeight, heightOffset, heightOffset);
   text("start again", width-heightOffset*2, drawingSurfaceHeight, heightOffset, heightOffset);
   text("quit drawing", width-heightOffset, drawingSurfaceHeight, heightOffset, heightOffset); 
   fill(white);
@@ -265,8 +269,31 @@ public void interfaceClicked() {
     println("clear");
     clearDraw();
   }
+  if (pageTest == true) {
+    println("coloring page");
+    coloringPage();
+  }
 }
+/**
+ i do not know how this next bit works, i found it on the  Processing Forum and it works
+ what it does is hide the menu bar in android. do not ask me how it does that
+ */
 
+/**
+ import android.os.Bundle; 
+ import android.view.WindowManager;
+ import android.view.*;
+ 
+ void onCreate(Bundle bundle) { 
+ super.onCreate(bundle);
+ View decorView = getActivity().getWindow().getDecorView();
+ decorView.setSystemUiVisibility(0);
+ int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+ | View.SYSTEM_UI_FLAG_FULLSCREEN;
+ decorView.setSystemUiVisibility(uiOptions);
+ }
+ */
+// end of bit that i do not know about
 public void population() {
   // fonts
   buttonFont = createFont ("Microsoft Sans Serif", 55);
@@ -283,14 +310,18 @@ public void population() {
   colors[3] = blue = 0xff4C47F2;
   colors[4] = white = 0xffFFFFFF;
   // sizes
-  brushSizes[0] = width*1/150;
-  brushSizes[1] = width*1/125;
-  brushSizes[2] = width*1/100;
-  brushSizes[3] = width*1/75;
-  brushSizes[4] = width*1/50;
-  brushSizes[5] = width*1/25;
+  brushSizes[0] = width*1/200;
+  brushSizes[1] = width*1/175;
+  brushSizes[2] = width*1/150;
+  brushSizes[3] = width*1/125;
+  brushSizes[4] = width*1/100;
+  brushSizes[5] = width*1/75;
+  brushSizes[6] = width*1/50;
+  brushSizes[7] = width*1/25;
   // ints
   shapeCount = 2;
+  // pics
+  pic = loadImage("carriage.png");
   // intal states
   ink = colors[0];
   drawingDiameter = brushSizes[0];
@@ -302,23 +333,24 @@ public void population() {
 
 public void tests() {
   // drawing test
-  drawTest = (mouseY < drawingSurfaceHeight);
+  drawTest = (pmouseY < drawingSurfaceHeight);
   // interface tests
-  quitButtonTest = (mouseX > width-heightOffset && mouseY > drawingSurfaceHeight);
-  clearTest = (mouseX > width-heightOffset*2 && mouseX < width-heightOffset && mouseY > drawingSurfaceHeight);
-  upTest = (mouseX > heightOffset && mouseX < heightOffset+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
-  downTest = (mouseX > heightOffset && mouseX < heightOffset+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
-  rightTest = (mouseX > heightOffset*2.5f && mouseX < heightOffset*2.5f+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
-  leftTest = (mouseX > heightOffset*2.5f && mouseX < heightOffset*2.5f+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
-  pageUpTest = (mouseX > heightOffset*3 && mouseX < heightOffset*3+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
-  pageDownTest = (mouseX > heightOffset*3 && mouseX < heightOffset*3+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
-  penTest = (mouseX > heightOffset*3.5f && mouseX < heightOffset*3.5f+halfOffset && mouseY > drawingSurfaceHeight && mouseY < drawingSurfaceHeight+halfOffset);
-  eraserTest = (mouseX > heightOffset*3.5f && mouseX < heightOffset*3.5f+halfOffset && mouseY > drawingSurfaceHeight+halfOffset);
+  quitButtonTest = (pmouseX > width-heightOffset && pmouseY > drawingSurfaceHeight);
+  clearTest = (pmouseX > width-heightOffset*2 && pmouseX < width-heightOffset && pmouseY > drawingSurfaceHeight);
+  pageTest = (pmouseX > width-heightOffset*3 && pmouseX < width-heightOffset*2 && pmouseY > drawingSurfaceHeight);
+  upTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
+  downTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight+halfOffset);
+  rightTest = (pmouseX > heightOffset*2.5f && pmouseX < heightOffset*2.5f+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
+  leftTest = (pmouseX > heightOffset*2.5f && pmouseX < heightOffset*2.5f+halfOffset && pmouseY > drawingSurfaceHeight+halfOffset);
+  pageUpTest = (pmouseX > heightOffset*3 && pmouseX < heightOffset*3+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
+  pageDownTest = (pmouseX > heightOffset*3 && pmouseX < heightOffset*3+halfOffset && pmouseY > drawingSurfaceHeight+halfOffset);
+  penTest = (pmouseX > heightOffset*3.5f && pmouseX < heightOffset*3.5f+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
+  eraserTest = (pmouseX > heightOffset*3.5f && pmouseX < heightOffset*3.5f+halfOffset && pmouseY > drawingSurfaceHeight+halfOffset);
 }
 public void dot() {
   fill(ink);
   noStroke();
-  circle(mouseX, mouseY, drawingDiameter);
+  circle(pmouseX, pmouseY, drawingDiameter);
   stroke(black);
 }
 
@@ -326,7 +358,7 @@ public void square() {
   rectMode(CENTER);
   fill(ink);
   noStroke();
-  square(mouseX, mouseY, drawingDiameter);
+  square(pmouseX, pmouseY, drawingDiameter);
   stroke(black);
   rectMode(CORNER);
 }
@@ -334,8 +366,8 @@ public void square() {
 public void airBrush() {
   for ( int i= 0; i < 25; i++) {
     // setup
-    float X = ( randomGaussian() * (drawingDiameter/2)) + mouseX;
-    float Y = ( randomGaussian() * (drawingDiameter/2)) + mouseY;
+    float X = ( randomGaussian() * (drawingDiameter/2)) + pmouseX;
+    float Y = ( randomGaussian() * (drawingDiameter/2)) + pmouseY;
     // safety
     if ( Y > drawingSurfaceHeight) {
       X = drawingSurfaceStart;
@@ -374,6 +406,13 @@ public void clearDraw() {
   backgroundColor = ink;
   fill(backgroundColor);
   rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
+};
+
+public void coloringPage() {
+  ink = white;
+  clearDraw();
+  ink = black;
+  image(pic, drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
 };
   public void settings() {  size(1280, 720); }
   static public void main(String[] passedArgs) {
