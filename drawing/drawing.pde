@@ -6,6 +6,7 @@ int colorNumber, brushSizeNumber, shape, shapeCount;
 PFont buttonFont;
 color[] colors = new color[5];
 float[] brushSizes = new float[6];
+PImage pic;
 
 void setup() {
   orientation(LANDSCAPE);
@@ -34,6 +35,7 @@ void draw() {
     draw = false;
   }
   drawInterface();
+  imageDraw();
 }
 
 void mousePressed() {

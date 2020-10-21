@@ -22,13 +22,15 @@ void population() {
   brushSizes[5] = width*1/25;
   // ints
   shapeCount = 2;
+  // pics
+  pic = loadImage("carriage.png");
   // intal states
   ink = colors[0];
   drawingDiameter = brushSizes[0];
   shape = 0;
   update = true;
   draw = false;
-  backgroundColor = white;
+  backgroundColor = red;
 }
 
 void tests() {
