@@ -10,8 +10,8 @@ PImage pic;
 
 void setup() {
   orientation(LANDSCAPE);
-  size(1280, 720);
-  //fullScreen();
+  //size(1280, 720);
+  fullScreen();
   population();
   fill(backgroundColor);
   rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
@@ -38,7 +38,9 @@ void draw() {
 }
 
 void mousePressed() {
-  drawLatch();
+  if (drawTest == true) {
+    draw = true;
+  }
   interfaceClicked();
 }
 
