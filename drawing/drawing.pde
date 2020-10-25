@@ -13,12 +13,12 @@ void setup() {
   //size(1280, 720);
   fullScreen();
   population();
+  tests();
   fill(backgroundColor);
   rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
 }
 
 void draw() {
-  tests();
   if (draw == true && drawTest == true) {
     switch(shape) {
     case 0:
@@ -38,6 +38,7 @@ void draw() {
 }
 
 void mousePressed() {
+  tests();
   if (drawTest == true) {
     draw = true;
   }
