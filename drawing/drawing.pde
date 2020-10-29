@@ -19,6 +19,7 @@ void setup() {
 }
 
 void draw() {
+  tests();
   if (draw == true && drawTest == true) {
     switch(shape) {
     case 0:
