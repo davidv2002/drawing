@@ -7,7 +7,7 @@ void drawInterface() {
   square(heightOffset, drawingSurfaceHeight, halfOffset);
   square(heightOffset, drawingSurfaceHeight+halfOffset, halfOffset);
   // shape and size
-  if (update == true) {
+  if (update == true || shape != 2) {
     square(heightOffset*1.5, drawingSurfaceHeight, heightOffset);
     fill(black);
     interfaceShape();
