@@ -27,17 +27,17 @@ void drawInterface() {
   //reset
   square(heightOffset*4, drawingSurfaceHeight, heightOffset);
   // backgournd color
-  rectMode(CORNERS);
   fill(backgroundColor);
-  rect(heightOffset*5, drawingSurfaceHeight, width-heightOffset*3, height);
+  square(heightOffset*5, drawingSurfaceHeight, heightOffset);
   fill(white);
-  rectMode(CORNER);
   // coloring page
-  square(width-heightOffset*3, drawingSurfaceHeight, heightOffset);
+  square(heightOffset*6, drawingSurfaceHeight, heightOffset);
   // background
-  square(width-heightOffset*2, drawingSurfaceHeight, heightOffset);
+  square(heightOffset*7, drawingSurfaceHeight, heightOffset);
   // quit 
-  square(width-heightOffset, drawingSurfaceHeight, heightOffset);
+  rectMode(CORNERS);
+  rect(heightOffset*8, drawingSurfaceHeight, width, height);
+  rectMode(CORNER);
   // text on buttons
   interfaceText();
 }
@@ -84,17 +84,17 @@ void interfaceText() {
   text("basic pen", heightOffset*3.5, drawingSurfaceHeight, halfOffset, halfOffset);
   text("big eraser", heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
   textFont(buttonFont, height/20);
-  rectMode(CORNERS);
-  if (backgroundColor == black) {
+  text("fill", heightOffset*4, drawingSurfaceHeight, heightOffset, heightOffset);
+    if (backgroundColor == black) {
     fill(white);
   }
-  text("filled color", heightOffset*5, drawingSurfaceHeight, width-heightOffset*3, height);
-  rectMode(CORNER);
+  text("filled color", heightOffset*5, drawingSurfaceHeight, heightOffset, heightOffset);
   fill (black);
-  text("fill", heightOffset*4, drawingSurfaceHeight, heightOffset, heightOffset);
-  text("coloring page", width-heightOffset*3, drawingSurfaceHeight, heightOffset, heightOffset);
-  text("reset", width-heightOffset*2, drawingSurfaceHeight, heightOffset, heightOffset);
-  text("quit drawing", width-heightOffset, drawingSurfaceHeight, heightOffset, heightOffset); 
+  text("coloring page", heightOffset*6, drawingSurfaceHeight, heightOffset, heightOffset);
+  text("reset", heightOffset*7, drawingSurfaceHeight, heightOffset, heightOffset);
+  rectMode(CORNERS);
+  text("quit", heightOffset*8, drawingSurfaceHeight, width, height); 
+  rectMode(CORNER);
   fill(white);
 }
 

@@ -27,10 +27,10 @@ void tests() {
   // drawing test
   drawTest = (pmouseY < drawingSurfaceHeight);
   // interface tests
-  quitButtonTest = (pmouseX > width-heightOffset && pmouseY > drawingSurfaceHeight);
+  quitButtonTest = (pmouseX > heightOffset*8 && pmouseY > drawingSurfaceHeight);
   fillTest = (pmouseX > heightOffset*4 && pmouseX < heightOffset*5 && pmouseY > drawingSurfaceHeight);
-  resetTest = (pmouseX > width-heightOffset*2 && pmouseX < width-heightOffset && pmouseY > drawingSurfaceHeight);
-  pageTest = (pmouseX > width-heightOffset*3 && pmouseX < width-heightOffset*2 && pmouseY > drawingSurfaceHeight);
+  resetTest = (pmouseX > heightOffset*7 && pmouseX < heightOffset*8 && pmouseY > drawingSurfaceHeight);
+  pageTest = (pmouseX > heightOffset*6 && pmouseX < heightOffset*7 && pmouseY > drawingSurfaceHeight);
   upTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
   downTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight+halfOffset);
   rightTest = (pmouseX > heightOffset*2.5 && pmouseX < heightOffset*2.5+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
