@@ -136,9 +136,7 @@ void interfaceClicked() {
   }
   if (resetTest) {
     println("reset");
-    intalStates();  
-    fill(backgroundColor);
-    rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
+    intalStates();
     return;
   }
   if (pageTest) {

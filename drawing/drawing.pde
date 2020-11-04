@@ -14,8 +14,6 @@ void setup() {
   //fullScreen();
   population();
   tests();
-  fill(backgroundColor);
-  rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
 }
 
 void draw() {
@@ -42,6 +40,7 @@ void mousePressed() {
   tests();
   if (drawTest) {
     draw = true;
+    return;
   }
   interfaceClicked();
 }
