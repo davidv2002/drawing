@@ -26,6 +26,12 @@ void drawInterface() {
   square(heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset);
   //reset
   square(heightOffset*4, drawingSurfaceHeight, heightOffset);
+  // backgournd color
+  rectMode(CORNERS);
+  fill(backgroundColor);
+  rect(heightOffset*5, drawingSurfaceHeight, width-heightOffset*3, height);
+  fill(white);
+  rectMode(CORNER);
   // coloring page
   square(width-heightOffset*3, drawingSurfaceHeight, heightOffset);
   // background
@@ -78,6 +84,13 @@ void interfaceText() {
   text("basic pen", heightOffset*3.5, drawingSurfaceHeight, halfOffset, halfOffset);
   text("big eraser", heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
   textFont(buttonFont, height/20);
+  rectMode(CORNERS);
+  if (backgroundColor == black) {
+    fill(white);
+  }
+  text("filled color", heightOffset*5, drawingSurfaceHeight, width-heightOffset*3, height);
+  rectMode(CORNER);
+  fill (black);
   text("fill", heightOffset*4, drawingSurfaceHeight, heightOffset, heightOffset);
   text("coloring page", width-heightOffset*3, drawingSurfaceHeight, heightOffset, heightOffset);
   text("reset", width-heightOffset*2, drawingSurfaceHeight, heightOffset, heightOffset);
@@ -142,6 +155,5 @@ void interfaceClicked() {
   if (pageTest) {
     println("coloring page");
     coloringPage();
-    return;
   }
 }
