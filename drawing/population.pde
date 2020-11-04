@@ -27,6 +27,10 @@ void population() {
   // pics
   pic = loadImage("carriage.png");
   // intal states
+  intalStates();
+}
+
+void intalStates() {
   ink = colors[0];
   drawingDiameter = brushSizes[0];
   shape = 0;
@@ -40,7 +44,8 @@ void tests() {
   drawTest = (pmouseY < drawingSurfaceHeight);
   // interface tests
   quitButtonTest = (pmouseX > width-heightOffset && pmouseY > drawingSurfaceHeight);
-  clearTest = (pmouseX > width-heightOffset*2 && pmouseX < width-heightOffset && pmouseY > drawingSurfaceHeight);
+  fillTest = (pmouseX > heightOffset*4 && pmouseX < heightOffset*5 && pmouseY > drawingSurfaceHeight);
+  resetTest = (pmouseX > width-heightOffset*2 && pmouseX < width-heightOffset && pmouseY > drawingSurfaceHeight);
   pageTest = (pmouseX > width-heightOffset*3 && pmouseX < width-heightOffset*2 && pmouseY > drawingSurfaceHeight);
   upTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight && pmouseY < drawingSurfaceHeight+halfOffset);
   downTest = (pmouseX > heightOffset && pmouseX < heightOffset+halfOffset && pmouseY > drawingSurfaceHeight+halfOffset);

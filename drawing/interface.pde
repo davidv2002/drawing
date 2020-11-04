@@ -7,7 +7,7 @@ void drawInterface() {
   square(heightOffset, drawingSurfaceHeight, halfOffset);
   square(heightOffset, drawingSurfaceHeight+halfOffset, halfOffset);
   // shape and size
-  if (update == true || shape != 2) {
+  if (update || shape != 2) {
     square(heightOffset*1.5, drawingSurfaceHeight, heightOffset);
     fill(black);
     interfaceShape();
@@ -24,6 +24,8 @@ void drawInterface() {
   square(heightOffset*3.5, drawingSurfaceHeight, halfOffset);
   // eraser
   square(heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset);
+  //reset
+  square(heightOffset*4, drawingSurfaceHeight, heightOffset);
   // coloring page
   square(width-heightOffset*3, drawingSurfaceHeight, heightOffset);
   // background
@@ -76,54 +78,72 @@ void interfaceText() {
   text("basic pen", heightOffset*3.5, drawingSurfaceHeight, halfOffset, halfOffset);
   text("big eraser", heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
   textFont(buttonFont, height/20);
+  text("fill", heightOffset*4, drawingSurfaceHeight, heightOffset, heightOffset);
   text("coloring page", width-heightOffset*3, drawingSurfaceHeight, heightOffset, heightOffset);
-  text("start again", width-heightOffset*2, drawingSurfaceHeight, heightOffset, heightOffset);
+  text("reset", width-heightOffset*2, drawingSurfaceHeight, heightOffset, heightOffset);
   text("quit drawing", width-heightOffset, drawingSurfaceHeight, heightOffset, heightOffset); 
   fill(white);
 }
 
 void interfaceClicked() {
-  if (quitButtonTest == true) {
+  if (quitButtonTest) {
     exit();
   }
-  if (upTest == true) {
+  if (upTest) {
     println("up");
     cycleColorUp();
+    return;
   }
-  if (downTest == true) {
+  if (downTest) {
     println("down");
     cycleColorDown();
+    return;
   }
-  if (rightTest == true) {
+  if (rightTest) {
     println("right");
     cycleSizeUp();
+    return;
   }
-  if (leftTest == true) {
+  if (leftTest) {
     println("left");
     cycleSizeDown();
+    return;
   }
-  if (pageUpTest == true) {
+  if (pageUpTest) {
     println("page up");
     shapeUp();
+    return;
   }
-  if (pageDownTest == true) {
+  if (pageDownTest) {
     println("page down");
     shapeDown();
+    return;
   }
-  if (penTest == true) {
+  if (penTest) {
     println("basic pen");
     basicPen();
+    return;
   }
-  if (eraserTest == true) {
+  if (eraserTest) {
     println("big eraser");
     eraser();
+    return;
   }
-  if (clearTest == true) {
-    println("clear");
+  if (fillTest) {
+    println("fill");
     clearDraw();
+    return;
   }
-  if (pageTest == true) {
+  if (resetTest) {
+    println("reset");
+    intalStates();  
+    fill(backgroundColor);
+    rect(drawingSurfaceStart, drawingSurfaceStart, width, drawingSurfaceHeight);
+    return;
+  }
+  if (pageTest) {
     println("coloring page");
     coloringPage();
+    return;
   }
 }
