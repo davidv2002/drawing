@@ -9,9 +9,7 @@ float[] brushSizes = new float[8];
 PImage pic;
 
 void setup() {
-  orientation(LANDSCAPE);
-  //size(1280, 720);
-  fullScreen();
+  size(1024, 768);
   population();
   tests();
 }

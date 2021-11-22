@@ -1,9 +1,9 @@
 void population() {
   // fonts
-  buttonFont = createFont ("Microsoft Sans Serif", 55);
+  buttonFont = createFont ("Microsoft Sans Serif", 80);
   // floats
   drawingSurfaceStart = 0;
-  drawingSurfaceHeight = height*4/5;
+  drawingSurfaceHeight = height-width/9.0;
   heightOffset = height-drawingSurfaceHeight;
   halfOffset = heightOffset/2;
   // arrays

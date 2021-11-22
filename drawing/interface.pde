@@ -74,23 +74,23 @@ void interfaceShape() {
 void interfaceText() {
   fill(black);
   textAlign (CENTER, CENTER);
+  textFont(buttonFont, height/40);
+  text("color\n up", heightOffset, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("color\n down", heightOffset, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
+  text("size\n up", heightOffset*2.5, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("size\n down", heightOffset*2.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
+  text("shape\n up", heightOffset*3, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("shape\n down", heightOffset*3, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
+  text("basic\n pen", heightOffset*3.5, drawingSurfaceHeight, halfOffset, halfOffset);
+  text("big\n eraser", heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
   textFont(buttonFont, height/30);
-  text("color up", heightOffset, drawingSurfaceHeight, halfOffset, halfOffset);
-  text("color down", heightOffset, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
-  text("size up", heightOffset*2.5, drawingSurfaceHeight, halfOffset, halfOffset);
-  text("size down", heightOffset*2.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
-  text("shape up", heightOffset*3, drawingSurfaceHeight, halfOffset, halfOffset);
-  text("shape down", heightOffset*3, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
-  text("basic pen", heightOffset*3.5, drawingSurfaceHeight, halfOffset, halfOffset);
-  text("big eraser", heightOffset*3.5, drawingSurfaceHeight+halfOffset, halfOffset, halfOffset);
-  textFont(buttonFont, height/20);
   text("fill", heightOffset*4, drawingSurfaceHeight, heightOffset, heightOffset);
-    if (backgroundColor == black) {
+  if (backgroundColor == black) {
     fill(white);
   }
-  text("filled color", heightOffset*5, drawingSurfaceHeight, heightOffset, heightOffset);
+  text("filled\n color", heightOffset*5, drawingSurfaceHeight, heightOffset, heightOffset);
   fill (black);
-  text("coloring page", heightOffset*6, drawingSurfaceHeight, heightOffset, heightOffset);
+  text("coloring\n page", heightOffset*6, drawingSurfaceHeight, heightOffset, heightOffset);
   text("reset", heightOffset*7, drawingSurfaceHeight, heightOffset, heightOffset);
   rectMode(CORNERS);
   text("quit", heightOffset*8, drawingSurfaceHeight, width, height); 
@@ -103,57 +103,46 @@ void interfaceClicked() {
     exit();
   }
   if (upTest) {
-    println("up");
     cycleColorUp();
     return;
   }
   if (downTest) {
-    println("down");
     cycleColorDown();
     return;
   }
   if (rightTest) {
-    println("right");
     cycleSizeUp();
     return;
   }
   if (leftTest) {
-    println("left");
     cycleSizeDown();
     return;
   }
   if (pageUpTest) {
-    println("page up");
     shapeUp();
     return;
   }
   if (pageDownTest) {
-    println("page down");
     shapeDown();
     return;
   }
   if (penTest) {
-    println("basic pen");
     basicPen();
     return;
   }
   if (eraserTest) {
-    println("big eraser");
     eraser();
     return;
   }
   if (fillTest) {
-    println("fill");
     clearDraw();
     return;
   }
   if (resetTest) {
-    println("reset");
     intalStates();
     return;
   }
   if (pageTest) {
-    println("coloring page");
     coloringPage();
   }
 }
